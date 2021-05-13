@@ -293,7 +293,7 @@ void test_morpho_dilatation_routine(int h, int w0)
     dilatation3_ui8matrix_reg                 (X, 0, h-1, 0, w1-1, Y_reg);         // puts("reg                 ");
     dilatation3_ui8matrix_rot                 (X, 0, h-1, 0, w1-1, Y_rot);         // puts("rot                 ");
     dilatation3_ui8matrix_red                 (X, 0, h-1, 0, w1-1, Y_red);         // puts("red                 ");
-    //dilatation3_ui8matrix_ilu3                (X, 0, h-1, 0, w1-1, Y_ilu3);        // puts("ilu3                ");
+    dilatation3_ui8matrix_ilu3                (X, 0, h-1, 0, w1-1, Y_ilu3);        // puts("ilu3                ");
     dilatation3_ui8matrix_ilu3_red            (X, 0, h-1, 0, w1-1, Y_ilu3r);       // puts("ilu3_red            ");
     dilatation3_ui8matrix_elu2_red            (X, 0, h-1, 0, w1-1, Y_elu2r);       // puts("elu2_red            ");
     dilatation3_ui8matrix_elu2_red_factor     (X, 0, h-1, 0, w1-1, Y_elu2rf);      // puts("elu2_red_factor     ");
@@ -2291,9 +2291,9 @@ int test_morpho(int argc, char* argv[])
 
 
     
-    //test_morpho_dilatation();
+    test_morpho_dilatation();
     //test_morpho_erosion();
-    test_morpho_ouverture();
+    //test_morpho_ouverture();
     
     bench_morpho_ouverture(128, 1024, 8);
     

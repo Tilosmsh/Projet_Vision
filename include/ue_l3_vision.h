@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#define BINOME "LACASSAGNE"
+#define BINOME "CANITROT_LI"
 // nom du binome (ou du monome)
 // servira pour l'affichage des resultats et le calcul de la note
 

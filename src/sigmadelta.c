@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "macro.h"
 #include "nrtype.h"
 #include "nrdef.h"
 #include "nrutil.h"
@@ -37,11 +38,45 @@ int findPower2(int x)
 void SigmaDelta_Step0_line(uint8 *I, uint8 *M, uint8 *O, uint8 *V, uint8 *E, int j0, int j1)
 // -----------------------------------------------------------------------------------------
 {
+    int j;
+    for( j = j0; j <= j1; j++ ){
+        M[j] = I[j];
+        V[j] = SD_VMIN;
+    }
 }
 // ------------------------------------------------------------------------------------------------
 void SigmaDelta_1Step_line(uint8 *I, uint8 *M, uint8 *O, uint8 *V, uint8 *E, int k, int j0, int j1)
 // ------------------------------------------------------------------------------------------------
 {
+    int j;
+
+    for( j = j0; j <= j1; j++ ){//step #1 : Mt estimation
+        if( M[j] < I[j] ){M[j] = M[j] + 1;}
+        else { 
+            if( M[j] > I[j] ) {M[j] = M[j] - 1;}
+        }
+
+    }
+
+    for( j = j0; j <= j1; j++ ){//step #2 : Ot computation
+        uint8 tmp = abs( M[j] - I[j] );
+        O[j] = tmp;
+    }
+
+    for( j = j0; j <= j1; j++ ){//step #3 : Vt update and clamping
+        if( V[j] < k * O[j] ){V[j] = V[j] + 1;}
+        else {
+            if( V[j] > k * O[j] ){ V[j] = V[j] - 1;}
+        }
+
+        V[j] = max( min( V[j] , SD_VMAX ) , SD_VMIN );// clamp to [Vmin, Vmax], Vmax = 254, Vmin = 1
+       
+    }
+
+    for( j = j0; j <= j1; j++ ){// step #4 : Eˆt estimation
+        if ( O[j] < V[j] ){E[j] = 0;}
+        else {E[j] = 1;}
+    }
 }
 // ---------------------------------------------------------------------------------------------------------
 void SigmaDelta_Step0(uint8 **I, uint8 **M, uint8 **O, uint8 **V, uint8 **E, int i0, int i1, int j0, int j1)

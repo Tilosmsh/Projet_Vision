@@ -90,7 +90,8 @@ void test_PGM(void)
     
     i0 = 0; i1 = h-1; j0 = 0; j1 = w-1;
     
-    src_path = "/Users/lacas/Code/MotionACC/results/";
+    //src_path = "/Users/lacas/Code/MotionACC/results/";
+    src_path = "/Users/tilos/Downloads/github/Canitrot_Li_3I013/Projet_visionFinal/results/";
     
     generate_path_filename_k_ndigit_extension(dst_path, "I_", tstart, ndigit, "pgm", complete_filenameI);
     generate_path_filename_k_ndigit_extension(dst_path, "M_", tstart, ndigit, "pgm", complete_filenameM);
