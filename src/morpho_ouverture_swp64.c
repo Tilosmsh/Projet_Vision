@@ -13,6 +13,7 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "macro.h"
 #include "nrtype.h"
 #include "nrdef.h"
 #include "nrutil.h"
@@ -60,6 +61,8 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 void ouverture3_ui64matrix_swp64_basic(uint64 **X, int i0, int i1, int j0, int j1, uint64 **Y, uint64 **Z)
 // -------------------------------------------------------------------------------------------------------
 {
+    erosion3_ui64matrix_swp64_basic(X, i0-1, i1+1, j0-1, j1+1, Y);
+    dilatation3_ui64matrix_swp64_basic(Y, i0,   i1,   j0,   j1,   Z);
 }
 // --------------------------------------------------------------------------------------------------
 void ouverture3_ui64matrix_swp64_fusion_basic(uint64 **X, int i0, int i1, int j0, int j1, uint64 **Y)

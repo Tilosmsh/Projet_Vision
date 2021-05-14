@@ -13,6 +13,7 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "macro.h"
 #include "nrtype.h"
 #include "nrdef.h"
 #include "nrutil.h"

@@ -216,7 +216,7 @@ void line_ouverture3_ui8matrix_fusion_red(uint8 **X, int i, int j0, int j1, uint
                     x42,x43,x44);
 
         max = or9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
-        
+
         store2(Y,i,j,max);
     }
 }

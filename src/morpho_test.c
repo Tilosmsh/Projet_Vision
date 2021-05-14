@@ -1535,7 +1535,7 @@ pipeline:
     ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red       (X64, 0, h-1, 0, w64-1,            Y64_fusion_ilu3_elu2_red       );
     ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(X64, 0, h-1, 0, w64-1,            Y64_fusion_ilu3_elu2_red_factor);
     
-    //display_ui64matrix(Y64_basic                      ,  0, h-1, 0, w64-1, format8, "Y64_basic                      ");
+    display_ui64matrix(Y64_basic                      ,  0, h-1, 0, w64-1, format8, "Y64_basic                      ");
     //display_ui64matrix(Y64_fusion_basic               ,  0, h-1, 0, w64-1, format8, "Y64_fusion_basic               ");
     //display_ui64matrix(Y64_fusion_red                 ,  0, h-1, 0, w64-1, format8, "Y64_fusion_red                 ");
     //display_ui64matrix(Y64_fusion_ilu3_red            ,  0, h-1, 0, w64-1, format8, "Y64_fusion_ilu3_red            ");
@@ -2291,11 +2291,15 @@ int test_morpho(int argc, char* argv[])
 
 
     
-    test_morpho_dilatation();
+    //test_morpho_dilatation();
     //test_morpho_erosion();
-    //test_morpho_ouverture();
+    test_morpho_ouverture();
     
+<<<<<<< HEAD
     bench_morpho_ouverture(128, 1024, 128);
+=======
+    //bench_morpho_ouverture(128, 1024, 8);
+>>>>>>> 1addad42afc4fc4787d8e6bc677f4b8a2fcc9d7b
     
   return 0;
 }

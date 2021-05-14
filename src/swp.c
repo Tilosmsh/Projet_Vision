@@ -26,7 +26,7 @@
 void B2b(int i0, int i1, int card, int* b0, int* b1)
 // =================================================
 {
-    if(i0 % card) {
+    if(i0 % card){
         *b0 = (i0 - card) / card;
     } else {
         *b0 = i0 / card;

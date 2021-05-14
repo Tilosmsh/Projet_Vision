@@ -24,6 +24,11 @@
 void line_erosion3_ui64matrix_swp64_basic(uint64 **X, int i, int j0, int j1, uint64 **Y)
 // -------------------------------------------------------------------------------------
 {
+    int j;
+    for(j=j0; j<=j1; j++) {
+        Y[i][j] = and9(X[i-1][j-1]=X[i-1][j-1]&         ,X[i-1][j]                          ,X[i-1][j+1]                        ,
+                       X[i  ][j-1]                      , X[i  ][j], X[i  ][j+1],
+                       X[i+1][j-1], X[i+1][j], X[i+1][j+1]);
 }
 // -----------------------------------------------------------------------------------
 void line_erosion3_ui64matrix_swp64_reg(uint64 **X, int i, int j0, int j1, uint64 **Y)

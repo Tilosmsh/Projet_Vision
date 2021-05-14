@@ -46,6 +46,7 @@ extern "C" {
 #define and(x0, x1) x0&x1
 #define and3(x0, x1, x2) x0&x1&x2
 #define and5(x0, x1, x2, x3, x4) x0&x1&x2&x3&x4
+#define and6(x0, x1, x2, x3, x4,x5) x0&x1&x2&x3&x4&x5
 #define and9(a,b,c,d,e,f,g,h,i) a&b&c&d&e&f&g&h&i
 #define and9_mat33(x,i0,j0) x[i0][j0]&x[i0][j0+1]&x[i0][j0+2]&x[i0+1][j0]&x[i0+1][j0+1]&x[i0+1][j0+2]&x[i0+2][j0]&x[i0+2][j0+1]&x[i0+2][j0+2]
 
