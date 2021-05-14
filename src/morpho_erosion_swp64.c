@@ -46,7 +46,7 @@ void line_erosion3_ui64matrix_swp64_basic(uint64 **X, int i, int j0, int j1, uin
                     (X[i  ][j]>>1)|((X[i  ][j-1]&1)<<63)&X[i  ][j]&(X[i  ][j]<<1)|((X[i  ][j+1]&(1L<<63))>>63)&
                     (X[i+1][j]>>1)|((X[i+1][j-1]&1)<<63)&X[i+1][j]&(X[i+1][j]<<1)|((X[i+1][j+1]&(1L<<63))>>63);
 
-                //printf("ey:%llx\n",Y[i][j]);
+                printf("ey:%llx\n",Y[i][j]);
     }
     
 
