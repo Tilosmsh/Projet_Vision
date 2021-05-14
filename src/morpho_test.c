@@ -2295,7 +2295,7 @@ int test_morpho(int argc, char* argv[])
     //test_morpho_erosion();
     //test_morpho_ouverture();
     
-    bench_morpho_ouverture(128, 1024, 8);
+    bench_morpho_ouverture(128, 1024, 128);
     
   return 0;
 }
