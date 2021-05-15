@@ -44,9 +44,9 @@ void line_dilatation3_ui64matrix_swp64_reg(uint64 **X, int i, int j0, int j1, ui
                 x3=load2(X,i  ,j-1), x4=load2(X,i  ,j), x5=load2(X,i  ,j+1),
                 x6=load2(X,i+1,j-1), x7=load2(X,i+1,j), x8=load2(X,i+1,j+1);
 
-        Y[i][j] = or9(x0, x1, x2,
-                       x3, x4, x5,
-                       x6, x7, x8);
+        Y[i][j] = i64dilatation9(x0, x1, x2,
+                                x3, x4, x5,
+                                x6, x7, x8);
     }
 }
 // --------------------------------------------------------------------------
@@ -54,10 +54,10 @@ void line_dilatation3_ui64matrix_swp64_rot(uint64 **X, int i, int j0, int j1, ui
 // --------------------------------------------------------------------------
 {
     uint64   x0=load2(X,i-1,j0-1), x1=load2(X,i  ,j0-1), x2=load2(X,i+1,j0-1),
-            res0 = or3(x0, x1, x2),
+            res0 = i64dilatation3(x0, x1, x2),
 
             x3=load2(X,i-1,j0  ), x4=load2(X,i  ,j0  ), x5=load2(X,i+1,j0  ),
-            res1 = or3(x3, x4, x5),
+            res1 = i64dilatation3(x3, x4, x5),
 
             x6                  , x7                  , x8                  ,
             res2,
@@ -66,8 +66,8 @@ void line_dilatation3_ui64matrix_swp64_rot(uint64 **X, int i, int j0, int j1, ui
 
     for (int j=j0; j<=j1; j++) {
         x6=load2(X,i-1,j+1), x7=load2(X,i  ,j+1), x8=load2(X,i+1,j+1),
-        res2 = or3(x6, x7, x8);//load
-        res=or3(res0,res1,res2);//calc
+        res2 = i64dilatation3(x6, x7, x8);//load
+        res=i64dilatation3(res0,res1,res2);//calc
         store2(Y, i, j, res);//store
         res0=res1;//rot res1->res0
         res1=res2;//rot res2->res1
@@ -78,10 +78,10 @@ void line_dilatation3_ui64matrix_swp64_red(uint64 **X, int i, int j0, int j1, ui
 // --------------------------------------------------------------------------
 {
     uint64   x0=load2(X,i-1,j0-1), x1=load2(X,i  ,j0-1), x2=load2(X,i+1,j0-1),
-            res0 = or3(x0, x1, x2),
+            res0 = i64dilatation3(x0, x1, x2),
 
             x3=load2(X,i-1,j0  ), x4=load2(X,i  ,j0  ), x5=load2(X,i+1,j0  ),
-            res1 = or3(x3, x4, x5),
+            res1 = i64dilatation3(x3, x4, x5),
 
             x6                  , x7                  , x8                  ,
             res2,
@@ -90,8 +90,8 @@ void line_dilatation3_ui64matrix_swp64_red(uint64 **X, int i, int j0, int j1, ui
 
     for (int j=j0; j<=j1; j++) {
         x6=load2(X,i-1,j+1), x7=load2(X,i  ,j+1), x8=load2(X,i+1,j+1),
-        res2 = or3(x6, x7, x8);//load
-        res=or3(res0,res1,res2);//calc
+        res2 = i64dilatation3(x6, x7, x8);//load
+        res=i64dilatation3(res0,res1,res2);//calc
         store2(Y, i, j, res);//store
         res0=res1;//rot res1->res0
         res1=res2;//rot res2->res1
@@ -104,7 +104,7 @@ void line_dilatation3_ui64matrix_swp64_ilu3(uint64 **X, int i, int j0, int j1, u
     uint64 a0=load2(X, i-1, j0-1),b0=load2(X, i-1, j0),c0=load2(X, i-1, j0+1),
           a1=load2(X, i  , j0-1),b1=load2(X, i  , j0),c1=load2(X, i  , j0+1),
           a2=load2(X, i+1, j0-1),b2=load2(X, i+1, j0),c2=load2(X, i+1, j0+1),
-          a = or3(a0, a1, a2),  b = or3(b0, b1, b2),c= or3(c0, c1, c2),
+          a = i64dilatation3(a0, a1, a2),  b = i64dilatation3(b0, b1, b2),c= i64dilatation3(c0, c1, c2),
           y;//9 regs pour la val cru, 3 regs pour le or colonne, 1 reg pour resultat
 
     //boucle
@@ -114,22 +114,22 @@ void line_dilatation3_ui64matrix_swp64_ilu3(uint64 **X, int i, int j0, int j1, u
         c0=load2(X,i-1,j+1);
         c1=load2(X,i  ,j+1);
         c2=load2(X,i+1,j+1);
-        c=or3(c0,c1,c2);
-        y=or3(a,b,c);
+        c=i64dilatation3(c0,c1,c2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j  ,y);
 
         a0=load2(X,i-1,j+2);
         a1=load2(X,i  ,j+2);
         a2=load2(X,i+1,j+2);
-        a=or3(a0,a1,a2);
-        y=or3(a,b,c);
+        a=i64dilatation3(a0,a1,a2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j+1,y);
         
         b0=load2(X,i-1,j+3);
         b1=load2(X,i  ,j+3);
         b2=load2(X,i+1,j+3);
-        b=or3(b0,b1,b2);
-        y=or3(a,b,c);
+        b=i64dilatation3(b0,b1,b2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j+2,y);
     }
 
@@ -138,23 +138,23 @@ void line_dilatation3_ui64matrix_swp64_ilu3(uint64 **X, int i, int j0, int j1, u
         c0=load2(X,i-1,j+1);
         c1=load2(X,i  ,j+1);
         c2=load2(X,i+1,j+1);
-        c=or3(c0,c1,c2);
-        y=or3(a,b,c);
+        c=i64dilatation3(c0,c1,c2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j  ,y);
     }
     else if(r==2){
         c0=load2(X,i-1,j+1);
         c1=load2(X,i  ,j+1);
         c2=load2(X,i+1,j+1);
-        c=or3(c0,c1,c2);
-        y=or3(a,b,c);
+        c=i64dilatation3(c0,c1,c2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j  ,y);
 
         a0=load2(X,i-1,j+2);
         a1=load2(X,i  ,j+2);
         a2=load2(X,i+1,j+2);
-        c=or3(a0,a1,a2);
-        y=or3(a,b,c);
+        c=i64dilatation3(a0,a1,a2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j+1,y);
     }
 }
@@ -165,7 +165,7 @@ void line_dilatation3_ui64matrix_swp64_ilu3_red(uint64 **X, int i, int j0, int j
     uint64 a0=load2(X, i-1, j0-1),b0=load2(X, i-1, j0),c0,
           a1=load2(X, i  , j0-1),b1=load2(X, i  , j0),c1,
           a2=load2(X, i+1, j0-1),b2=load2(X, i+1, j0),c2,
-          a = or3(a0, a1, a2),  b = or3(b0, b1, b2),c,
+          a = i64dilatation3(a0, a1, a2),  b = i64dilatation3(b0, b1, b2),c,
           y;//9 regs pour la val cru, 3 regs pour le or colonne, 1 reg pour resultat
 
     //boucle
@@ -175,21 +175,21 @@ void line_dilatation3_ui64matrix_swp64_ilu3_red(uint64 **X, int i, int j0, int j
         c0=load2(X,i-1,j+1);
         c1=load2(X,i  ,j+1);
         c2=load2(X,i+1,j+1);
-        c=or3(c0,c1,c2);
-        y=or3(a,b,c);
+        c=i64dilatation3(c0,c1,c2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j  ,y);
 
         a0=load2(X,i-1,j+2);
         a1=load2(X,i  ,j+2);
         a2=load2(X,i+1,j+2);
-        a=or3(a0,a1,a2);
-        y=or3(a,b,c);store2(Y,i,j+1,y);
+        a=i64dilatation3(a0,a1,a2);
+        y=i64dilatation3(a,b,c);store2(Y,i,j+1,y);
         
         b0=load2(X,i-1,j+3);
         b1=load2(X,i  ,j+3);
         b2=load2(X,i+1,j+3);
-        b=or3(b0,b1,b2);
-        y=or3(a,b,c);store2(Y,i,j+2,y);
+        b=i64dilatation3(b0,b1,b2);
+        y=i64dilatation3(a,b,c);store2(Y,i,j+2,y);
     }
 
     //epilogue
@@ -197,23 +197,23 @@ void line_dilatation3_ui64matrix_swp64_ilu3_red(uint64 **X, int i, int j0, int j
         c0=load2(X,i-1,j+1);
         c1=load2(X,i  ,j+1);
         c2=load2(X,i+1,j+1);
-        c=or3(c0,c1,c2);
-        y=or3(a,b,c);
+        c=i64dilatation3(c0,c1,c2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j  ,y);
     }
     else if(r==2){
         c0=load2(X,i-1,j+1);
         c1=load2(X,i  ,j+1);
         c2=load2(X,i+1,j+1);
-        c=or3(c0,c1,c2);
-        y=or3(a,b,c);
+        c=i64dilatation3(c0,c1,c2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j  ,y);
 
         a0=load2(X,i-1,j+2);
         a1=load2(X,i  ,j+2);
         a2=load2(X,i+1,j+2);
-        c=or3(a0,a1,a2);
-        y=or3(a,b,c);
+        c=i64dilatation3(a0,a1,a2);
+        y=i64dilatation3(a,b,c);
         store2(Y,i,j+1,y);
     }
 }
@@ -237,14 +237,14 @@ void line_dilatation3_ui64matrix_swp64_elu2_red(uint64 **X, int i, int j0, int j
 
         x2=load2(X,i-1,j+1), x5=load2(X,i  ,j+1), x8=load2(X,i+1,j+1), x11=load2(X,i+2,j+1);
         
-        res = or9(  x0,x1,x2,
-                    x3,x4,x5,
-                    x6,x7,x8);
+        res = i64dilatation9(   x0,x1,x2,
+                                x3,x4,x5,
+                                x6,x7,x8);
         store2(Y,i,j,res);
 
-        res = or9(  x3,x4 , x5,
-                    x6,x7 , x8,
-                    x9,x10,x11);
+        res = i64dilatation9(  x3,x4 , x5,
+                               x6,x7 , x8,
+                               x9,x10,x11);
         store2(Y,i+1,j,res);
 
         x0=x1 ;x1=x2;
@@ -274,12 +274,12 @@ void line_dilatation3_ui64matrix_swp64_elu2_red_factor(uint64 **X, int i, int j0
     for (int j=j0; j<=j1; j++) {
         x2=load2(X,i-1,j+1), x5=load2(X,i  ,j+1), x8=load2(X,i+1,j+1), x11=load2(X,i+2,j+1);
 
-        cse=or(or3(x3,x4,x5),or3(x6,x7,x8));
+        cse=or(i64dilatation3(x3,x4,x5),i64dilatation3(x6,x7,x8));
 
-        res = or(or3(x0,x1,x2),cse);
+        res = or(i64dilatation3(x0,x1,x2),cse);
         store2(Y,i,j,res);
 
-        res = or(or3(x9,x10,x11),cse);
+        res = or(i64dilatation3(x9,x10,x11),cse);
         store2(Y,i+1,j,res);
 
         x0=x1 ;x1=x2;
@@ -311,10 +311,10 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red(uint64 **X, int i, int j0, 
     b2=load2(X, i+1, j0);
     b3=load2(X, i+2, j0);
     
-    ora0 = or3(a0, a1, a2);  
-    ora1 = or3(a1, a2, a3);
-    orb0 = or3(b0, b1, b2);
-    orb1 = or3(b1, b2, b3);
+    ora0 = i64dilatation3(a0, a1, a2);  
+    ora1 = i64dilatation3(a1, a2, a3);
+    orb0 = i64dilatation3(b0, b1, b2);
+    orb1 = i64dilatation3(b1, b2, b3);
 
     //boucle
     int j,n=j1-j0+1,r=n%3;
@@ -325,12 +325,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red(uint64 **X, int i, int j0, 
         c2=load2(X,i+1,j+1);
         c3=load2(X,i+2,j+1);
         //calc & store(i,j)
-        orc0=or3(c0,c1,c2);
-        y0=or3(ora0,orb0,orc0);
+        orc0=i64dilatation3(c0,c1,c2);
+        y0=i64dilatation3(ora0,orb0,orc0);
         store2(Y,i,j,y0);  
         //calc & store (i+1,j)
-        orc1=or3(c1,c2,c3);
-        y1=or3(ora1,orb1,orc1);
+        orc1=i64dilatation3(c1,c2,c3);
+        y1=i64dilatation3(ora1,orb1,orc1);
         store2(Y,i+1,j,y1);
 
         //load colonne a
@@ -339,12 +339,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red(uint64 **X, int i, int j0, 
         a2=load2(X,i+1,j+2);
         a3=load2(X,i+2,j+2);
         //calc & store (i,j+1)
-        ora0=or3(a0,a1,a2);
-        y0=or3(ora0,orb0,orc0);
+        ora0=i64dilatation3(a0,a1,a2);
+        y0=i64dilatation3(ora0,orb0,orc0);
         store2(Y,i,j+1,y0);
         //calc & store (i+1,j+1)
-        ora1=or3(a1,a2,a3);
-        y1=or3(ora1,orb1,orc1);
+        ora1=i64dilatation3(a1,a2,a3);
+        y1=i64dilatation3(ora1,orb1,orc1);
         store2(Y,i+1,j+1,y1);
         
         //load colonne b
@@ -353,12 +353,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red(uint64 **X, int i, int j0, 
         b2=load2(X,i+1,j+3);
         b3=load2(X,i+2,j+3);
         //calc & store (i,j+2)
-        orb0=or3(b0,b1,b2);
-        y0=or3(ora0,orb0,orc0);
+        orb0=i64dilatation3(b0,b1,b2);
+        y0=i64dilatation3(ora0,orb0,orc0);
         store2(Y,i,j+2,y0); 
         //calc & store (i+1,j+2)
-        orb1=or3(b1,b2,b3);
-        y1=or3(ora1,orb1,orc1);
+        orb1=i64dilatation3(b1,b2,b3);
+        y1=i64dilatation3(ora1,orb1,orc1);
         store2(Y,i+1,j+2,y1);  
     }
 
@@ -370,12 +370,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red(uint64 **X, int i, int j0, 
         c2=load2(X,i+1,j+1);
         c3=load2(X,i+2,j+1);
         //calc & store(i,j)
-        orc0=or3(c0,c1,c2);
-        y0=or3(ora0,orb0,orc0);
+        orc0=i64dilatation3(c0,c1,c2);
+        y0=i64dilatation3(ora0,orb0,orc0);
         store2(Y,i,j,y0);   
         //calc & store (i+1,j)
-        orc1=or3(c1,c2,c3);
-        y1=or3(ora1,orb1,orc1);
+        orc1=i64dilatation3(c1,c2,c3);
+        y1=i64dilatation3(ora1,orb1,orc1);
         store2(Y,i+1,j,y1);  
     }
     else if(r==2){
@@ -385,12 +385,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red(uint64 **X, int i, int j0, 
         c2=load2(X,i+1,j+1);
         c3=load2(X,i+2,j+1);
         //calc & store(i,j)
-        orc0=or3(c0,c1,c2);
-        y0=or3(ora0,orb0,orc0);
+        orc0=i64dilatation3(c0,c1,c2);
+        y0=i64dilatation3(ora0,orb0,orc0);
         store2(Y,i,j,y0);   
         //calc & store (i+1,j)
-        orc1=or3(c1,c2,c3);
-        y1=or3(ora1,orb1,orc1);
+        orc1=i64dilatation3(c1,c2,c3);
+        y1=i64dilatation3(ora1,orb1,orc1);
         store2(Y,i+1,j,y1);  
         //load colonne a
         a0=load2(X,i-1,j+2);
@@ -398,12 +398,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red(uint64 **X, int i, int j0, 
         a2=load2(X,i+1,j+2);
         a3=load2(X,i+2,j+2);
         //calc & store(i,j+1)
-        ora0=or3(a0,a1,a2);
-        y0=or3(ora0,orb0,orc0);
+        ora0=i64dilatation3(a0,a1,a2);
+        y0=i64dilatation3(ora0,orb0,orc0);
         store2(Y,i,j+1,y0);  
         //calc & store (i+1,j+1)
-        ora1=or3(a1,a2,a3);
-        y1=or3(ora1,orb1,orc1);
+        ora1=i64dilatation3(a1,a2,a3);
+        y1=i64dilatation3(ora1,orb1,orc1);
         store2(Y,i+1,j+1,y1);  
     }
 }
@@ -438,12 +438,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red_factor(uint64 **X, int i, i
         c2=load2(X,i+1,j+1);
         c3=load2(X,i+2,j+1);
         //calc factor
-        factor = or(or3(a1,b1,c1),or3(a2,b2,c2));
+        factor = or(i64dilatation3(a1,b1,c1),i64dilatation3(a2,b2,c2));
         //calc & store(i,j)
-        y0=or(factor,or3(a0,b0,c0));
+        y0=or(factor,i64dilatation3(a0,b0,c0));
         store2(Y,i,j,y0);  
         //calc & store (i+1,j)
-        y1=or(factor,or3(a3,b3,c3));
+        y1=or(factor,i64dilatation3(a3,b3,c3));
         store2(Y,i+1,j,y1); 
 
         //load colonne a
@@ -452,12 +452,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red_factor(uint64 **X, int i, i
         a2=load2(X,i+1,j+2);
         a3=load2(X,i+2,j+2);
         //calc factor
-        factor = or(or3(a1,b1,c1),or3(a2,b2,c2));
+        factor = or(i64dilatation3(a1,b1,c1),i64dilatation3(a2,b2,c2));
         //calc & store (i,j+1)
-        y0=or(factor,or3(a0,b0,c0));
+        y0=or(factor,i64dilatation3(a0,b0,c0));
         store2(Y,i,j+1,y0); 
         //calc & store (i+1,j+1)
-        y1=or(factor,or3(a3,b3,c3));
+        y1=or(factor,i64dilatation3(a3,b3,c3));
         store2(Y,i+1,j+1,y1);
         
         //load colonne b
@@ -466,12 +466,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red_factor(uint64 **X, int i, i
         b2=load2(X,i+1,j+3);
         b3=load2(X,i+2,j+3);
         //calc factor
-        factor = or(or3(a1,b1,c1),or3(a2,b2,c2));
+        factor = or(i64dilatation3(a1,b1,c1),i64dilatation3(a2,b2,c2));
         //calc & store (i,j+2)
-        y0=or(factor,or3(a0,b0,c0));
+        y0=or(factor,i64dilatation3(a0,b0,c0));
         store2(Y,i,j+2,y0); 
         //calc & store (i+1,j+2)
-        y1=or(factor,or3(a3,b3,c3));
+        y1=or(factor,i64dilatation3(a3,b3,c3));
         store2(Y,i+1,j+2,y1);
     }
 
@@ -483,12 +483,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red_factor(uint64 **X, int i, i
         c2=load2(X,i+1,j+1);
         c3=load2(X,i+2,j+1);
         //calc factor
-        factor = or(or3(a1,b1,c1),or3(a2,b2,c2));
+        factor = or(i64dilatation3(a1,b1,c1),i64dilatation3(a2,b2,c2));
         //calc & store(i,j)
-        y0=or(factor,or3(a0,b0,c0));
+        y0=or(factor,i64dilatation3(a0,b0,c0));
         store2(Y,i,j,y0);   
         //calc & store (i+1,j)
-        y1=or(factor,or3(a3,b3,c3));
+        y1=or(factor,i64dilatation3(a3,b3,c3));
         store2(Y,i+1,j,y1);
     }
     else if(r==2){
@@ -498,12 +498,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red_factor(uint64 **X, int i, i
         c2=load2(X,i+1,j+1);
         c3=load2(X,i+2,j+1);
         //calc factor
-        factor = or(or3(a1,b1,c1),or3(a2,b2,c2));
+        factor = or(i64dilatation3(a1,b1,c1),i64dilatation3(a2,b2,c2));
         //calc & store(i,j)
-        y0=or(factor,or3(a0,b0,c0));
+        y0=or(factor,i64dilatation3(a0,b0,c0));
         store2(Y,i,j,y0); 
         //calc & store (i+1,j)
-        y1=or(factor,or3(a3,b3,c3));
+        y1=or(factor,i64dilatation3(a3,b3,c3));
         store2(Y,i+1,j,y1);
 
         //load colonne a
@@ -512,12 +512,12 @@ void line_dilatation3_ui64matrix_swp64_ilu3_elu2_red_factor(uint64 **X, int i, i
         a2=load2(X,i+1,j+2);
         a3=load2(X,i+2,j+2);
         //calc factor
-        factor = or(or3(a1,b1,c1),or3(a2,b2,c2));
+        factor = or(i64dilatation3(a1,b1,c1),i64dilatation3(a2,b2,c2));
         //calc & store (i,j+1)
-        y0=or(factor,or3(a0,b0,c0));
+        y0=or(factor,i64dilatation3(a0,b0,c0));
         store2(Y,i,j+1,y0);
         //calc & store (i+1,j+1)
-        y1=or(factor,or3(a3,b3,c3));
+        y1=or(factor,i64dilatation3(a3,b3,c3));
         store2(Y,i+1,j+1,y1);
     }
 }

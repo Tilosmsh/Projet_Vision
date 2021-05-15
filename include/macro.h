@@ -54,6 +54,24 @@ extern "C" {
 #define i64right(a,b,n) (((a)>>n)|((b)<<(64-n)))
 #define i64left(b,c,n) (((c)<<n)|((b)>>(64-n)))
 
+#define i64erosion_mat33(X,i,j) and9(i64left(X[i-1][j-1],X[i-1][j],1),X[i-1][j],i64right(X[i-1][j],X[i-1][j+1],1),i64left(X[i  ][j-1],X[i  ][j],1),X[i  ][j],i64right(X[i  ][j],X[i  ][j+1],1),i64left(X[i+1][j-1],X[i+1][j],1),X[i+1][j],i64right(X[i+1][j],X[i+1][j+1],1))
+#define i64dilatation_mat33(X,i,j) or9(i64left(X[i-1][j-1],X[i-1][j],1),X[i-1][j],i64right(X[i-1][j],X[i-1][j+1],1),i64left(X[i  ][j-1],X[i  ][j],1),X[i  ][j],i64right(X[i  ][j],X[i  ][j+1],1),i64left(X[i+1][j-1],X[i+1][j],1),X[i+1][j],i64right(X[i+1][j],X[i+1][j+1],1))
+
+
+#define i64erosion3(x0,x1,x2) and3(i64left(x0,x1,1),x1,i64right(x1,x2,1))
+#define i64dilatation3(x0,x1,x2) or3(i64left(x0,x1,1),x1,i64right(x1,x2,1))
+
+#define i64erosion4(x0,x1,x2,factor) and(i64erosion3(x0,x1,x2),factor)
+#define i64dilatation4(x0,x1,x2,factor) or(i64dilatation3(x0,x1,x2),factor)
+
+#define i64erosion6(x0,x1,x2,x3,x4,x5) and(i64erosion3(x0,x1,x2),i64erosion3(x3,x4,x5))
+#define i64dilatation6(x0,x1,x2,x3,x4,x5) or(i64dilatation3(x0,x1,x2),i64dilatation3(x3,x4,x5))
+
+#define i64erosion9(x0,x1,x2,x3,x4,x5,x6,x7,x8) and9(i64left(x0,x1,1),x1,i64right(x1,x2,1),i64left(x3,x4,1),x4,i64right(x4,x5,1),i64left(x6,x7,1),x7,i64right(x7,x8,1))
+#define i64dilatation9(x0,x1,x2,x3,x4,x5,x6,x7,x8) or9(i64left(x0,x1,1),x1,i64right(x1,x2,1),i64left(x3,x4,1),x4,i64right(x4,x5,1),i64left(x6,x7,1),x7,i64right(x7,x8,1))
+
+
+
 #ifdef __cplusplus
 }
 #endif
