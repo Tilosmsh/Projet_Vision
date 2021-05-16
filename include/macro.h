@@ -61,16 +61,26 @@ extern "C" {
 #define i64erosion3(x0,x1,x2) and3(i64left(x0,x1,1),x1,i64right(x1,x2,1))
 #define i64dilatation3(x0,x1,x2) or3(i64left(x0,x1,1),x1,i64right(x1,x2,1))
 
+#define i64erosion3c_left(x00,x01,x10,x11,x20,x21) and3(i64left(x00,x01,1),i64left(x10,x11,1),i64left(x20,x21,1))
+#define i64dilatation3c_left(x00,x01,x10,x11,x20,x21) or3(i64left(x00,x01,1),i64left(x10,x11,1),i64left(x20,x21,1))
+
+#define i64erosion3c_right(x00,x01,x10,x11,x20,x21) and3(i64right(x00,x01,1),i64right(x10,x11,1),i64right(x20,x21,1))
+#define i64dilatation3c_right(x00,x01,x10,x11,x20,x21) or3(i64right(x00,x01,1),i64right(x10,x11,1),i64right(x20,x21,1))
+
 #define i64erosion4(x0,x1,x2,factor) and(i64erosion3(x0,x1,x2),factor)
 #define i64dilatation4(x0,x1,x2,factor) or(i64dilatation3(x0,x1,x2),factor)
 
 #define i64erosion6(x0,x1,x2,x3,x4,x5) and(i64erosion3(x0,x1,x2),i64erosion3(x3,x4,x5))
 #define i64dilatation6(x0,x1,x2,x3,x4,x5) or(i64dilatation3(x0,x1,x2),i64dilatation3(x3,x4,x5))
 
+#define i64erosion6_red(x0,x1,x2,x3,x4,x5) i64erosion3(and(x0,x3),and(x1,x4),and(x2,x5))
+#define i64dilatation6_red(x0,x1,x2,x3,x4,x5) i64dilatation3(or(x0,x3),or(x1,x4),or(x2,x5))
+
 #define i64erosion9(x0,x1,x2,x3,x4,x5,x6,x7,x8) and9(i64left(x0,x1,1),x1,i64right(x1,x2,1),i64left(x3,x4,1),x4,i64right(x4,x5,1),i64left(x6,x7,1),x7,i64right(x7,x8,1))
 #define i64dilatation9(x0,x1,x2,x3,x4,x5,x6,x7,x8) or9(i64left(x0,x1,1),x1,i64right(x1,x2,1),i64left(x3,x4,1),x4,i64right(x4,x5,1),i64left(x6,x7,1),x7,i64right(x7,x8,1))
 
-
+#define i64erosion9_red(x0,x1,x2,x3,x4,x5,x6,x7,x8) i64erosion3(and3(x0,x3,x6),and3(x1,x4,x7),and3(x2,x5,x8))
+#define i64dilatation9_red(x0,x1,x2,x3,x4,x5,x6,x7,x8) i64dilatation3(or3(x0,x3,x6),or3(x1,x4,x7),or3(x2,x5,x8))
 
 #ifdef __cplusplus
 }

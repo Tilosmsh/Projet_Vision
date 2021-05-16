@@ -4637,8 +4637,8 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
     switch (r)
     {
         case 1:
-        
-                n04 = load2(X,i-2,j+2);
+        //printf("ilu15 case%d\n",r);
+        n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
         n34 = load2(X,i+1,j+2);
@@ -4691,7 +4691,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 2:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -4798,7 +4798,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
     
         case 3:
-        
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -4956,16 +4956,10 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
 
         store2(Y,i,j+2,max);
 
-        n02 = load2(X,i-2,j+5);
-        n12 = load2(X,i-1,j+5);
-        n22 = load2(X,i  ,j+5);
-        n32 = load2(X,i+1,j+5);
-        n42 = load2(X,i+2,j+5);
-
         break;
 
         case 4:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -5178,7 +5172,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 5:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -5441,7 +5435,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 6:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -5754,7 +5748,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 7:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -6117,7 +6111,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 8:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -6532,7 +6526,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 9:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -6997,7 +6991,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 10:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -7513,7 +7507,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 11:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -8080,7 +8074,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 12:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -8699,7 +8693,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 13:
-
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -9367,7 +9361,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 14:
-        
+        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);

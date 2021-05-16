@@ -1792,7 +1792,7 @@ void test_morpho_ouverture(void)
     
     
     int dh = 0;
-    int dw = 0;
+    int dw = 9;
     int sw = 1; //step
     
     int s = 0; // nombre de test valides
@@ -2291,8 +2291,8 @@ int test_morpho(int argc, char* argv[])
 
 
     
-    //test_morpho_dilatation();
-    //test_morpho_erosion();
+    // test_morpho_dilatation();
+    // test_morpho_erosion();
     test_morpho_ouverture();
     
     bench_morpho_ouverture(128, 1024, 8);

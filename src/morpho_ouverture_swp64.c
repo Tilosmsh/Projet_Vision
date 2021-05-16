@@ -86,7 +86,7 @@ void line_ouverture3_ui64matrix_swp64_fusion_basic(uint64 **X, int i, int j0, in
 void line_ouverture3_ui64matrix_swp64_fusion_red(uint64 **X, int i, int j0, int j1, uint64 **Y)
 // --------------------------------------------------------------------------------------------
 {
-    uint64   x00,x01,x02,x03,x04,
+    uint64  x00,x01,x02,x03,x04,
             x10,x11,x12,x13,x14,
             x20,x21,x22,x23,x24,
             x30,x31,x32,x33,x34,
@@ -127,50 +127,51 @@ void line_ouverture3_ui64matrix_swp64_fusion_red(uint64 **X, int i, int j0, int 
         x34=load2(X,i+1,j+2);
         x44=load2(X,i+2,j+2);
 
-        z00 = i64erosion9( x00,x01,x02,
-                    x10,x11,x12,
-                    x20,x21,x22);
+        z00 = i64erosion9_red(  x00,x01,x02,
+                            x10,x11,x12,
+                            x20,x21,x22);
 
-        z10 = i64erosion9( x10,x11,x12,
-                    x20,x21,x22,
-                    x30,x31,x32);
+        z10 = i64erosion9_red(  x10,x11,x12,
+                            x20,x21,x22,
+                            x30,x31,x32);
 
-        z20 = i64erosion9( x20,x21,x22,
-                    x30,x31,x32,
-                    x40,x41,x42);
+        z20 = i64erosion9_red(  x20,x21,x22,
+                            x30,x31,x32,
+                            x40,x41,x42);
 
-        z01 = i64erosion9( x01,x02,x03,
-                    x11,x12,x13,
-                    x21,x22,x23);
+        z01 = i64erosion9_red(  x01,x02,x03,
+                            x11,x12,x13,
+                            x21,x22,x23);
 
-        z11 = i64erosion9( x11,x12,x13,
-                    x21,x22,x23,
-                    x31,x32,x33);
+        z11 = i64erosion9_red(  x11,x12,x13,
+                            x21,x22,x23,
+                            x31,x32,x33);
 
-        z21 = i64erosion9( x21,x22,x23,
-                    x31,x32,x33,
-                    x41,x42,x43);
+        z21 = i64erosion9_red(  x21,x22,x23,
+                            x31,x32,x33,
+                            x41,x42,x43);
 
-        z02 = i64erosion9( x02,x03,x04,
-                    x12,x13,x14,
-                    x22,x23,x24);
+        z02 = i64erosion9_red(  x02,x03,x04,
+                            x12,x13,x14,
+                            x22,x23,x24);
 
-        z12 = i64erosion9( x12,x13,x14,
-                    x22,x23,x24,
-                    x32,x33,x34);
+        z12 = i64erosion9_red(  x12,x13,x14,
+                            x22,x23,x24,
+                            x32,x33,x34);
 
-        z22 = i64erosion9( x22,x23,x24,
-                    x32,x33,x34,
-                    x42,x43,x44);
+        z22 = i64erosion9_red(  x22,x23,x24,
+                            x32,x33,x34,
+                            x42,x43,x44);
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
     }
 }
 // -------------------------------------------------------------------------------------------------
-void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0, int j1, uint64 **Y)//pas encore fait ilu3 mais ilu5
+void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0, int j1, uint64 **Y)
 // -------------------------------------------------------------------------------------------------
+//pas encore fait ilu3 mais ilu5
 {
     uint64  n00,n01,n02,n03,n04,
             n10,n11,n12,n13,n14,
@@ -220,46 +221,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         n44 = load2(X,i+2,j+2);
 //-----------------0---------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9(  n01,n02,n03,
+        z01 = i64erosion9_red(  n01,n02,n03,
                             n11,n12,n13,
                             n21,n22,n23);
 
-        z11 = i64erosion9(  n11,n12,n13,
+        z11 = i64erosion9_red(  n11,n12,n13,
                             n21,n22,n23,
                             n31,n32,n33);
 
-        z21 = i64erosion9(  n21,n22,n23,
+        z21 = i64erosion9_red(  n21,n22,n23,
                             n31,n32,n33,
                             n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9(  n02,n03,n04,
+        z02 = i64erosion9_red(  n02,n03,n04,
                             n12,n13,n14,
                             n22,n23,n24);
 
-        z12 = i64erosion9(  n12,n13,n14,
+        z12 = i64erosion9_red(  n12,n13,n14,
                             n22,n23,n24,
                             n32,n33,n34);
 
-        z22 = i64erosion9(  n22,n23,n24,
+        z22 = i64erosion9_red(  n22,n23,n24,
                             n32,n33,n34,
                             n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 //-----------------------1--------------------
@@ -271,46 +272,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i,j+1,max);
@@ -324,46 +325,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         
 //---------------2-----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         
 
@@ -376,46 +377,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         n42 = load2(X,i+2,j+5);
 //------------------3--------------------
 
-        z00 = i64erosion9( n03,n04,n00,
+        z00 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z10 = i64erosion9( n13,n14,n10,
+        z10 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z20 = i64erosion9( n23,n24,n20,
+        z20 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z01 = i64erosion9( n04,n00,n01,
+        z01 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z11 = i64erosion9( n14,n10,n11,
+        z11 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z21 = i64erosion9( n24,n20,n21,
+        z21 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        z02 = i64erosion9( n00,n01,n02,
+        z02 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z12 = i64erosion9( n10,n11,n12,
+        z12 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z22 = i64erosion9( n20,n21,n22,
+        z22 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
        
 
         store2(Y,i,j+3,max);
@@ -427,46 +428,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         n43 = load2(X,i+2,j+6);
 //-----------------4---------------------
 
-        z00 = i64erosion9( n04,n00,n01,
+        z00 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z10 = i64erosion9( n14,n10,n11,
+        z10 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z20 = i64erosion9( n24,n20,n21,
+        z20 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        z01 = i64erosion9( n00,n01,n02,
+        z01 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z11 = i64erosion9( n10,n11,n12,
+        z11 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z21 = i64erosion9( n20,n21,n22,
+        z21 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z02 = i64erosion9( n01,n02,n03,
+        z02 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z12 = i64erosion9( n11,n12,n13,
+        z12 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z22 = i64erosion9( n21,n22,n23,
+        z22 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j+4,max);
     }
@@ -482,46 +483,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         n44 = load2(X,i+2,j+2);
 //-----------------0---------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
 
         store2(Y,i,j,max);
@@ -536,46 +537,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         n44 = load2(X,i+2,j+2);
 //-----------------0---------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 //-----------------------1--------------------
@@ -587,46 +588,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i,j+1,max);
@@ -641,46 +642,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         n44 = load2(X,i+2,j+2);
 //-----------------0---------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 //-----------------------1--------------------
@@ -692,46 +693,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i,j+1,max);
@@ -745,46 +746,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         
 //---------------2-----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         
 
@@ -800,46 +801,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         n44 = load2(X,i+2,j+2);
 //-----------------0---------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 //-----------------------1--------------------
@@ -851,46 +852,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i,j+1,max);
@@ -904,46 +905,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         
 //---------------2-----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         
 
@@ -956,46 +957,46 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_red(uint64 **X, int i, int j0,
         n42 = load2(X,i+2,j+5);
 //------------------3--------------------
 
-        z00 = i64erosion9( n03,n04,n00,
+        z00 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z10 = i64erosion9( n13,n14,n10,
+        z10 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z20 = i64erosion9( n23,n24,n20,
+        z20 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z01 = i64erosion9( n04,n00,n01,
+        z01 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z11 = i64erosion9( n14,n10,n11,
+        z11 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z21 = i64erosion9( n24,n20,n21,
+        z21 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        z02 = i64erosion9( n00,n01,n02,
+        z02 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z12 = i64erosion9( n10,n11,n12,
+        z12 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z22 = i64erosion9( n20,n21,n22,
+        z22 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
        
 
         store2(Y,i,j+3,max);
@@ -1079,9 +1080,10 @@ void line_ouverture3_ui64matrix_swp64_fusion_elu2_red(uint64 **X, int i, int j0,
     }
 }
 // ------------------------------------------------------------------------------------------------------
-void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, int j0, int j1, uint64 **Y)//ilu5elu2...
+void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, int j0, int j1, uint64 **Y)
 // ------------------------------------------------------------------------------------------------------
 {
+    //ilu5elu2...
     uint64  n00,n01,n02,n03,n04,
             n10,n11,n12,n13,n14,
             n20,n21,n22,n23,n24,
@@ -1137,89 +1139,89 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         n54 = load2(X,i+3,j+2);
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 
 //-------------------0-1-------------------
-        z00 = i64erosion9( n10,n11,n12,
+        z00 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z10 = i64erosion9( n20,n21,n22,
+        z10 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
 
-        z01 = i64erosion9( n11,n12,n13,
+        z01 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z11 = i64erosion9( n21,n22,n23,
+        z11 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z02 = i64erosion9( n12,n13,n14,
+        z02 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z12 = i64erosion9( n22,n23,n24,
+        z12 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i+1,j,max);
 
@@ -1233,92 +1235,92 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i,j+1,max);
 
 //-------------------1-1------------------
 
-        z00 = i64erosion9( n11,n12,n13,
+        z00 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z10 = i64erosion9( n21,n22,n23,
+        z10 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z20 = i64erosion9( n31,n32,n33,
+        z20 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z01 = i64erosion9( n12,n13,n14,
+        z01 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z11 = i64erosion9( n22,n23,n24,
+        z11 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z21 = i64erosion9( n32,n33,n34,
+        z21 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
 
-        z02 = i64erosion9( n13,n14,n10,
+        z02 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z12 = i64erosion9( n23,n24,n20,
+        z12 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z22 = i64erosion9( n33,n34,n30,
+        z22 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i+1,j+1,max);
@@ -1333,91 +1335,91 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         
 //---------------2-0----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         store2(Y,i,j+2,max);
 
 //---------------2-1----------------------
 
-        z00 = i64erosion9( n12,n13,n14,
+        z00 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z10 = i64erosion9( n22,n23,n24,
+        z10 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z20 = i64erosion9( n32,n33,n34,
+        z20 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
 
-        z01 = i64erosion9( n13,n14,n10,
+        z01 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z11 = i64erosion9( n23,n24,n20,
+        z11 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z21 = i64erosion9( n33,n34,n30,
+        z21 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        z02 = i64erosion9( n14,n10,n11,
+        z02 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z12 = i64erosion9( n24,n20,n21,
+        z12 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 
-        z22 = i64erosion9( n34,n30,n31,
+        z22 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         store2(Y,i+1,j+2,max);
 
@@ -1429,91 +1431,91 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         n52 = load2(X,i+3,j+5);
 //------------------3-0--------------------
 
-        z00 = i64erosion9( n03,n04,n00,
+        z00 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z10 = i64erosion9( n13,n14,n10,
+        z10 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z20 = i64erosion9( n23,n24,n20,
+        z20 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z01 = i64erosion9( n04,n00,n01,
+        z01 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z11 = i64erosion9( n14,n10,n11,
+        z11 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z21 = i64erosion9( n24,n20,n21,
+        z21 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        z02 = i64erosion9( n00,n01,n02,
+        z02 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z12 = i64erosion9( n10,n11,n12,
+        z12 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z22 = i64erosion9( n20,n21,n22,
+        z22 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
        
         store2(Y,i,j+3,max);
 
 //------------------3-1--------------------
 
-        z00 = i64erosion9( n13,n14,n10,
+        z00 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z10 = i64erosion9( n23,n24,n20,
+        z10 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z20 = i64erosion9( n33,n34,n30,
+        z20 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        z01 = i64erosion9( n14,n10,n11,
+        z01 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z11 = i64erosion9( n24,n20,n21,
+        z11 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 
-        z21 = i64erosion9( n34,n30,n31,
+        z21 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
 
-        z02 = i64erosion9( n10,n11,n12,
+        z02 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z12 = i64erosion9( n20,n21,n22,
+        z12 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z22 = i64erosion9( n30,n31,n32,
+        z22 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
        
         store2(Y,i+1,j+3,max);
 
@@ -1525,91 +1527,91 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         n53 = load2(X,i+3,j+6);
 //-----------------4-0--------------------
 
-        z00 = i64erosion9( n04,n00,n01,
+        z00 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z10 = i64erosion9( n14,n10,n11,
+        z10 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z20 = i64erosion9( n24,n20,n21,
+        z20 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        z01 = i64erosion9( n00,n01,n02,
+        z01 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z11 = i64erosion9( n10,n11,n12,
+        z11 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z21 = i64erosion9( n20,n21,n22,
+        z21 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z02 = i64erosion9( n01,n02,n03,
+        z02 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z12 = i64erosion9( n11,n12,n13,
+        z12 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z22 = i64erosion9( n21,n22,n23,
+        z22 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j+4,max);
 
     //-----------------4-1--------------------
 
-        z00 = i64erosion9( n14,n10,n11,
+        z00 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z10 = i64erosion9( n24,n20,n21,
+        z10 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 
-        z20 = i64erosion9( n34,n30,n31,
+        z20 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
 
-        z01 = i64erosion9( n10,n11,n12,
+        z01 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z11 = i64erosion9( n20,n21,n22,
+        z11 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z21 = i64erosion9( n30,n31,n32,
+        z21 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
 
-        z02 = i64erosion9( n11,n12,n13,
+        z02 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z12 = i64erosion9( n21,n22,n23,
+        z12 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z22 = i64erosion9( n31,n32,n33,
+        z22 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i+1,j+4,max);
     }
@@ -1626,89 +1628,89 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         n54 = load2(X,i+3,j+2);
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 
 //-------------------0-1-------------------
-        z00 = i64erosion9( n10,n11,n12,
+        z00 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z10 = i64erosion9( n20,n21,n22,
+        z10 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
 
-        z01 = i64erosion9( n11,n12,n13,
+        z01 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z11 = i64erosion9( n21,n22,n23,
+        z11 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z02 = i64erosion9( n12,n13,n14,
+        z02 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z12 = i64erosion9( n22,n23,n24,
+        z12 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i+1,j,max);
 
@@ -1723,89 +1725,89 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         n54 = load2(X,i+3,j+2);
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 
 //-------------------0-1-------------------
-        z00 = i64erosion9( n10,n11,n12,
+        z00 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z10 = i64erosion9( n20,n21,n22,
+        z10 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
 
-        z01 = i64erosion9( n11,n12,n13,
+        z01 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z11 = i64erosion9( n21,n22,n23,
+        z11 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z02 = i64erosion9( n12,n13,n14,
+        z02 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z12 = i64erosion9( n22,n23,n24,
+        z12 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i+1,j,max);
 
@@ -1819,92 +1821,92 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i,j+1,max);
 
 //-------------------1-1------------------
 
-        z00 = i64erosion9( n11,n12,n13,
+        z00 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z10 = i64erosion9( n21,n22,n23,
+        z10 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z20 = i64erosion9( n31,n32,n33,
+        z20 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z01 = i64erosion9( n12,n13,n14,
+        z01 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z11 = i64erosion9( n22,n23,n24,
+        z11 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z21 = i64erosion9( n32,n33,n34,
+        z21 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
 
-        z02 = i64erosion9( n13,n14,n10,
+        z02 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z12 = i64erosion9( n23,n24,n20,
+        z12 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z22 = i64erosion9( n33,n34,n30,
+        z22 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i+1,j+1,max);
@@ -1920,89 +1922,89 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         n54 = load2(X,i+3,j+2);
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 
 //-------------------0-1-------------------
-        z00 = i64erosion9( n10,n11,n12,
+        z00 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z10 = i64erosion9( n20,n21,n22,
+        z10 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
 
-        z01 = i64erosion9( n11,n12,n13,
+        z01 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z11 = i64erosion9( n21,n22,n23,
+        z11 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z02 = i64erosion9( n12,n13,n14,
+        z02 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z12 = i64erosion9( n22,n23,n24,
+        z12 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i+1,j,max);
 
@@ -2016,92 +2018,92 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i,j+1,max);
 
 //-------------------1-1------------------
 
-        z00 = i64erosion9( n11,n12,n13,
+        z00 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z10 = i64erosion9( n21,n22,n23,
+        z10 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z20 = i64erosion9( n31,n32,n33,
+        z20 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z01 = i64erosion9( n12,n13,n14,
+        z01 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z11 = i64erosion9( n22,n23,n24,
+        z11 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z21 = i64erosion9( n32,n33,n34,
+        z21 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
 
-        z02 = i64erosion9( n13,n14,n10,
+        z02 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z12 = i64erosion9( n23,n24,n20,
+        z12 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z22 = i64erosion9( n33,n34,n30,
+        z22 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i+1,j+1,max);
@@ -2116,91 +2118,91 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         
 //---------------2-0----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         store2(Y,i,j+2,max);
 
 //---------------2-1----------------------
 
-        z00 = i64erosion9( n12,n13,n14,
+        z00 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z10 = i64erosion9( n22,n23,n24,
+        z10 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z20 = i64erosion9( n32,n33,n34,
+        z20 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
 
-        z01 = i64erosion9( n13,n14,n10,
+        z01 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z11 = i64erosion9( n23,n24,n20,
+        z11 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z21 = i64erosion9( n33,n34,n30,
+        z21 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        z02 = i64erosion9( n14,n10,n11,
+        z02 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z12 = i64erosion9( n24,n20,n21,
+        z12 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 
-        z22 = i64erosion9( n34,n30,n31,
+        z22 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         store2(Y,i+1,j+2,max);
 
@@ -2215,89 +2217,89 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         n54 = load2(X,i+3,j+2);
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i,j,max);
 
 //-------------------0-1-------------------
-        z00 = i64erosion9( n10,n11,n12,
+        z00 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z10 = i64erosion9( n20,n21,n22,
+        z10 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
 
-        z01 = i64erosion9( n11,n12,n13,
+        z01 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z11 = i64erosion9( n21,n22,n23,
+        z11 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z02 = i64erosion9( n12,n13,n14,
+        z02 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z12 = i64erosion9( n22,n23,n24,
+        z12 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
         store2(Y,i+1,j,max);
 
@@ -2311,92 +2313,92 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 //--------------------------------------
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i,j+1,max);
 
 //-------------------1-1------------------
 
-        z00 = i64erosion9( n11,n12,n13,
+        z00 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z10 = i64erosion9( n21,n22,n23,
+        z10 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z20 = i64erosion9( n31,n32,n33,
+        z20 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
 
-        z01 = i64erosion9( n12,n13,n14,
+        z01 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z11 = i64erosion9( n22,n23,n24,
+        z11 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z21 = i64erosion9( n32,n33,n34,
+        z21 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
 
-        z02 = i64erosion9( n13,n14,n10,
+        z02 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z12 = i64erosion9( n23,n24,n20,
+        z12 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z22 = i64erosion9( n33,n34,n30,
+        z22 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
 
 
         store2(Y,i+1,j+1,max);
@@ -2411,91 +2413,91 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         
 //---------------2-0----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 //--------------------------------------
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         store2(Y,i,j+2,max);
 
 //---------------2-1----------------------
 
-        z00 = i64erosion9( n12,n13,n14,
+        z00 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z10 = i64erosion9( n22,n23,n24,
+        z10 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z20 = i64erosion9( n32,n33,n34,
+        z20 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 //--------------------------------------
 
-        z01 = i64erosion9( n13,n14,n10,
+        z01 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z11 = i64erosion9( n23,n24,n20,
+        z11 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z21 = i64erosion9( n33,n34,n30,
+        z21 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        z02 = i64erosion9( n14,n10,n11,
+        z02 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z12 = i64erosion9( n24,n20,n21,
+        z12 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 
-        z22 = i64erosion9( n34,n30,n31,
+        z22 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
         
         store2(Y,i+1,j+2,max);
 
@@ -2507,91 +2509,91 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
         n52 = load2(X,i+3,j+5);
 //------------------3-0--------------------
 
-        z00 = i64erosion9( n03,n04,n00,
+        z00 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z10 = i64erosion9( n13,n14,n10,
+        z10 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z20 = i64erosion9( n23,n24,n20,
+        z20 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 //--------------------------------------
 
-        z01 = i64erosion9( n04,n00,n01,
+        z01 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z11 = i64erosion9( n14,n10,n11,
+        z11 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z21 = i64erosion9( n24,n20,n21,
+        z21 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 //--------------------------------------
 
-        z02 = i64erosion9( n00,n01,n02,
+        z02 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z12 = i64erosion9( n10,n11,n12,
+        z12 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z22 = i64erosion9( n20,n21,n22,
+        z22 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
        
         store2(Y,i,j+3,max);
 
 //------------------3-1--------------------
 
-        z00 = i64erosion9( n13,n14,n10,
+        z00 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z10 = i64erosion9( n23,n24,n20,
+        z10 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z20 = i64erosion9( n33,n34,n30,
+        z20 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 //--------------------------------------
 
-        z01 = i64erosion9( n14,n10,n11,
+        z01 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z11 = i64erosion9( n24,n20,n21,
+        z11 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 
-        z21 = i64erosion9( n34,n30,n31,
+        z21 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
 
-        z02 = i64erosion9( n10,n11,n12,
+        z02 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z12 = i64erosion9( n20,n21,n22,
+        z12 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z22 = i64erosion9( n30,n31,n32,
+        z22 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
 
-        max = i64dilatation9(z00,z01,z02,z10,z11,z12,z20,z21,z22);
+        max = i64dilatation9_red(z00,z01,z02,z10,z11,z12,z20,z21,z22);
        
         store2(Y,i+1,j+3,max);
 
@@ -2602,14 +2604,14 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red(uint64 **X, int i, in
 void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, int i, int j0, int j1, uint64 **Y)
 // -------------------------------------------------------------------------------------------------------------
 {
-    uint64  n00,n01,n02,n03,n04,
+    uint64 n00,n01,n02,n03,n04,
            n10,n11,n12,n13,n14,
            n20,n21,n22,n23,n24,
            n30,n31,n32,n33,n34, 
            n40,n41,n42,n43,n44,
            n50,n51,n52,n53,n54;
 
-    uint64   z00,z01,z02,
+    uint64  z00,z01,z02,
             z10,z11,z12,
             z20,z21,z22;
 
@@ -2658,43 +2660,43 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n54 = load2(X,i+3,j+2);
 
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
@@ -2704,15 +2706,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------0-1-------------------
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
@@ -2729,42 +2731,42 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n50 = load2(X,i+3,j+3);
         
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
                     
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
-//--------------------------------------
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
+//----------------1-0---------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
@@ -2774,17 +2776,17 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------1-1------------------
 
-        z20 = i64erosion9( n31,n32,n33,
+        z20 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
 
-        z21 = i64erosion9( n32,n33,n34,
+        z21 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
 
-        z22 = i64erosion9( n33,n34,n30,
+        z22 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 
@@ -2803,42 +2805,42 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n51 = load2(X,i+3,j+4);
         
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
         
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
         
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 //---------------2-0----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
@@ -2848,15 +2850,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //---------------2-1----------------------
 
-        z20 = i64erosion9( n32,n33,n34,
+        z20 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
-        z21 = i64erosion9( n33,n34,n30,
+        z21 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 
-        z22 = i64erosion9( n34,n30,n31,
+        z22 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
@@ -2873,41 +2875,42 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n52 = load2(X,i+3,j+5);
 
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n13,n14,n10,
+        z10 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z20 = i64erosion9( n23,n24,n20,
+        z20 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z11 = i64erosion9( n14,n10,n11,
+        z11 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z21 = i64erosion9( n24,n20,n21,
+        z21 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 
-        z12 = i64erosion9( n10,n11,n12,
+        z12 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z22 = i64erosion9( n20,n21,n22,
+        z22 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 //------------------3-0--------------------
 
-        z00 = i64erosion9( n03,n04,n00,
+        z00 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z01 = i64erosion9( n04,n00,n01,
+        z01 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
-        z02 = i64erosion9( n00,n01,n02,
+        z02 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
@@ -2918,15 +2921,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 //------------------3-1--------------------
 
 
-        z20 = i64erosion9( n33,n34,n30,
+        z20 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 
-        z21 = i64erosion9( n34,n30,n31,
+        z21 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 
-        z22 = i64erosion9( n30,n31,n32,
+        z22 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 //--------------------------------------
@@ -2943,47 +2946,47 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n53 = load2(X,i+3,j+6);
 
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n14,n10,n11,
+        z10 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z20 = i64erosion9( n24,n20,n21,
+        z20 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
 
-        z11 = i64erosion9( n10,n11,n12,
+        z11 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z21 = i64erosion9( n20,n21,n22,
+        z21 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z12 = i64erosion9( n11,n12,n13,
+        z12 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z22 = i64erosion9( n21,n22,n23,
+        z22 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 
 //-----------------4-0--------------------
 
-        z00 = i64erosion9( n04,n00,n01,
+        z00 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
 //--------------------------------------
 
-        z01 = i64erosion9( n00,n01,n02,
+        z01 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
 //--------------------------------------
 
-        z02 = i64erosion9( n01,n02,n03,
+        z02 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
@@ -2995,15 +2998,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
     //-----------------4-1--------------------
 
-        z20 = i64erosion9( n34,n30,n31,
+        z20 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 
-        z21 = i64erosion9( n30,n31,n32,
+        z21 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 
-        z22 = i64erosion9( n31,n32,n33,
+        z22 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 //--------------------------------------
@@ -3025,43 +3028,43 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n54 = load2(X,i+3,j+2);
 
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
@@ -3071,15 +3074,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------0-1-------------------
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
@@ -3098,43 +3101,43 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n54 = load2(X,i+3,j+2);
 
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
@@ -3144,15 +3147,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------0-1-------------------
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
@@ -3169,42 +3172,42 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n50 = load2(X,i+3,j+3);
         
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
                     
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
@@ -3214,17 +3217,17 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------1-1------------------
 
-        z20 = i64erosion9( n31,n32,n33,
+        z20 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
 
-        z21 = i64erosion9( n32,n33,n34,
+        z21 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
 
-        z22 = i64erosion9( n33,n34,n30,
+        z22 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 
@@ -3245,43 +3248,43 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n54 = load2(X,i+3,j+2);
 
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
@@ -3291,15 +3294,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------0-1-------------------
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
@@ -3316,42 +3319,42 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n50 = load2(X,i+3,j+3);
         
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
                     
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
@@ -3361,17 +3364,17 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------1-1------------------
 
-        z20 = i64erosion9( n31,n32,n33,
+        z20 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
 
-        z21 = i64erosion9( n32,n33,n34,
+        z21 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
 
-        z22 = i64erosion9( n33,n34,n30,
+        z22 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 
@@ -3390,42 +3393,42 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n51 = load2(X,i+3,j+4);
         
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
         
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
         
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 //---------------2-0----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
@@ -3435,15 +3438,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //---------------2-1----------------------
 
-        z20 = i64erosion9( n32,n33,n34,
+        z20 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
-        z21 = i64erosion9( n33,n34,n30,
+        z21 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 
-        z22 = i64erosion9( n34,n30,n31,
+        z22 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
@@ -3463,43 +3466,43 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n54 = load2(X,i+3,j+2);
 
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n10,n11,n12,
+        z10 = i64erosion9_red( n10,n11,n12,
                     n20,n21,n22,
                     n30,n31,n32);
 
-        z20 = i64erosion9( n20,n21,n22,
+        z20 = i64erosion9_red( n20,n21,n22,
                     n30,n31,n32,
                     n40,n41,n42);
 
-        z11 = i64erosion9( n11,n12,n13,
+        z11 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z21 = i64erosion9( n21,n22,n23,
+        z21 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
 
-        z12 = i64erosion9( n12,n13,n14,
+        z12 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z22 = i64erosion9( n22,n23,n24,
+        z22 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 
 //-----------------0-0-------------------
 
-        z00 = i64erosion9( n00,n01,n02,
+        z00 = i64erosion9_red( n00,n01,n02,
                     n10,n11,n12,
                     n20,n21,n22);
 
-        z01 = i64erosion9( n01,n02,n03,
+        z01 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z02 = i64erosion9( n02,n03,n04,
+        z02 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
@@ -3509,15 +3512,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------0-1-------------------
 
-        z20 = i64erosion9( n30,n31,n32,
+        z20 = i64erosion9_red( n30,n31,n32,
                     n40,n41,n42,
                     n50,n51,n52);
 
-        z21 = i64erosion9( n31,n32,n33,
+        z21 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
-        z22 = i64erosion9( n32,n33,n34,
+        z22 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
@@ -3534,42 +3537,42 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n50 = load2(X,i+3,j+3);
         
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n11,n12,n13,
+        z10 = i64erosion9_red( n11,n12,n13,
                     n21,n22,n23,
                     n31,n32,n33);
 
-        z20 = i64erosion9( n21,n22,n23,
+        z20 = i64erosion9_red( n21,n22,n23,
                     n31,n32,n33,
                     n41,n42,n43);
                     
-        z11 = i64erosion9( n12,n13,n14,
+        z11 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z21 = i64erosion9( n22,n23,n24,
+        z21 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
 
-        z12 = i64erosion9( n13,n14,n10,
+        z12 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z22 = i64erosion9( n23,n24,n20,
+        z22 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 //--------------------------------------
 
-        z00 = i64erosion9( n01,n02,n03,
+        z00 = i64erosion9_red( n01,n02,n03,
                     n11,n12,n13,
                     n21,n22,n23);
 
-        z01 = i64erosion9( n02,n03,n04,
+        z01 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z02 = i64erosion9( n03,n04,n00,
+        z02 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
@@ -3579,17 +3582,17 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //-------------------1-1------------------
 
-        z20 = i64erosion9( n31,n32,n33,
+        z20 = i64erosion9_red( n31,n32,n33,
                     n41,n42,n43,
                     n51,n52,n53);
 
 
-        z21 = i64erosion9( n32,n33,n34,
+        z21 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
 
-        z22 = i64erosion9( n33,n34,n30,
+        z22 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 
@@ -3608,42 +3611,42 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n51 = load2(X,i+3,j+4);
         
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n12,n13,n14,
+        z10 = i64erosion9_red( n12,n13,n14,
                     n22,n23,n24,
                     n32,n33,n34);
 
-        z20 = i64erosion9( n22,n23,n24,
+        z20 = i64erosion9_red( n22,n23,n24,
                     n32,n33,n34,
                     n42,n43,n44);
         
-        z11 = i64erosion9( n13,n14,n10,
+        z11 = i64erosion9_red( n13,n14,n10,
                     n23,n24,n20,
                     n33,n34,n30);
 
-        z21 = i64erosion9( n23,n24,n20,
+        z21 = i64erosion9_red( n23,n24,n20,
                     n33,n34,n30,
                     n43,n44,n40);
 
-        z12 = i64erosion9( n14,n10,n11,
+        z12 = i64erosion9_red( n14,n10,n11,
                     n24,n20,n21,
                     n34,n30,n31);
 
-        z22 = i64erosion9( n24,n20,n21,
+        z22 = i64erosion9_red( n24,n20,n21,
                     n34,n30,n31,
                     n44,n40,n41);
         
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 //---------------2-0----------------------
 
-        z00 = i64erosion9( n02,n03,n04,
+        z00 = i64erosion9_red( n02,n03,n04,
                     n12,n13,n14,
                     n22,n23,n24);
 
-        z01 = i64erosion9( n03,n04,n00,
+        z01 = i64erosion9_red( n03,n04,n00,
                     n13,n14,n10,
                     n23,n24,n20);
 
-        z02 = i64erosion9( n04,n00,n01,
+        z02 = i64erosion9_red( n04,n00,n01,
                     n14,n10,n11,
                     n24,n20,n21);
 
@@ -3653,15 +3656,15 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 
 //---------------2-1----------------------
 
-        z20 = i64erosion9( n32,n33,n34,
+        z20 = i64erosion9_red( n32,n33,n34,
                     n42,n43,n44,
                     n52,n53,n54);
 
-        z21 = i64erosion9( n33,n34,n30,
+        z21 = i64erosion9_red( n33,n34,n30,
                     n43,n44,n40,
                     n53,n54,n50);
 
-        z22 = i64erosion9( n34,n30,n31,
+        z22 = i64erosion9_red( n34,n30,n31,
                     n44,n40,n41,
                     n54,n50,n51);
 //--------------------------------------
@@ -3678,43 +3681,43 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
         n52 = load2(X,i+3,j+5);
 
 //-----------------calc factor-------------------
-        z10 = i64erosion9( n13,n14,n10,
-                    n23,n24,n20,
-                    n33,n34,n30);
+        z10 = i64erosion9_red(  n13,n14,n10,
+                                n23,n24,n20,
+                                n33,n34,n30);
 
-        z20 = i64erosion9( n23,n24,n20,
-                    n33,n34,n30,
-                    n43,n44,n40);
+        z20 = i64erosion9_red(  n23,n24,n20,
+                                n33,n34,n30,
+                                n43,n44,n40);
 
-        z11 = i64erosion9( n14,n10,n11,
-                    n24,n20,n21,
-                    n34,n30,n31);
+        z11 = i64erosion9_red(  n14,n10,n11,
+                                n24,n20,n21,
+                                n34,n30,n31);
 
-        z21 = i64erosion9( n24,n20,n21,
-                    n34,n30,n31,
-                    n44,n40,n41);
+        z21 = i64erosion9_red(  n24,n20,n21,
+                                n34,n30,n31,
+                                n44,n40,n41);
 
-        z12 = i64erosion9( n10,n11,n12,
-                    n20,n21,n22,
-                    n30,n31,n32);
+        z12 = i64erosion9_red(  n10,n11,n12,
+                                n20,n21,n22,
+                                n30,n31,n32);
 
-        z22 = i64erosion9( n20,n21,n22,
-                    n30,n31,n32,
-                    n40,n41,n42);
-        factor = i64dilatation6(z10,z20,z11,z21,z12,z22);
+        z22 = i64erosion9_red(  n20,n21,n22,
+                                n30,n31,n32,
+                                n40,n41,n42);
+        factor = i64dilatation6_red(z10,z11,z12,z20,z21,z22);
 //------------------3-0--------------------
 
-        z00 = i64erosion9( n03,n04,n00,
-                    n13,n14,n10,
-                    n23,n24,n20);
+        z00 = i64erosion9_red(  n03,n04,n00,
+                                n13,n14,n10,
+                                n23,n24,n20);
 
-        z01 = i64erosion9( n04,n00,n01,
-                    n14,n10,n11,
-                    n24,n20,n21);
+        z01 = i64erosion9_red(  n04,n00,n01,
+                                n14,n10,n11,
+                                n24,n20,n21);
 
-        z02 = i64erosion9( n00,n01,n02,
-                    n10,n11,n12,
-                    n20,n21,n22);
+        z02 = i64erosion9_red(  n00,n01,n02,
+                                n10,n11,n12,
+                                n20,n21,n22);
 
         max = i64dilatation4(z00,z01,z02,factor);
        
@@ -3723,17 +3726,17 @@ void line_ouverture3_ui64matrix_swp64_fusion_ilu3_elu2_red_factor(uint64 **X, in
 //------------------3-1--------------------
 
 
-        z20 = i64erosion9( n33,n34,n30,
-                    n43,n44,n40,
-                    n53,n54,n50);
+        z20 = i64erosion9_red(  n33,n34,n30,
+                                n43,n44,n40,
+                                n53,n54,n50);
 
-        z21 = i64erosion9( n34,n30,n31,
-                    n44,n40,n41,
-                    n54,n50,n51);
+        z21 = i64erosion9_red(  n34,n30,n31,
+                                n44,n40,n41,
+                                n54,n50,n51);
 
-        z22 = i64erosion9( n30,n31,n32,
-                    n40,n41,n42,
-                    n50,n51,n52);
+        z22 = i64erosion9_red(  n30,n31,n32,
+                                n40,n41,n42,
+                                n50,n51,n52);
 //--------------------------------------
 
         max = i64dilatation4(z20,z21,z22,factor);
