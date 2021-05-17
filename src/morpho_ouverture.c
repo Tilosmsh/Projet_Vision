@@ -3850,20 +3850,6 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         n23 = load2(X,i  ,j0+1);
         n33 = load2(X,i+1,j0+1);
         n43 = load2(X,i+2,j0+1);
-
-        
-/*
-        n0 = 
-        n1 = 
-        n2 = 
-        n3 = 
-        n4 = 
-
-        z0 = 
-        z1 = 
-        z2 = 
-
-*/
         
         
     //boucle
@@ -4637,7 +4623,6 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
     switch (r)
     {
         case 1:
-        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -4691,7 +4676,6 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 2:
-        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -4798,7 +4782,6 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
     
         case 3:
-        //printf("ilu15 case%d\n",r);
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -4959,7 +4942,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 4:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -5172,7 +5155,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 5:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -5435,7 +5418,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 6:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -5748,7 +5731,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 7:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -6111,7 +6094,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 8:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -6526,7 +6509,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 9:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -6991,7 +6974,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 10:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -7507,7 +7490,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 11:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -8074,7 +8057,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 12:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -8693,7 +8676,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 13:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);
@@ -9361,7 +9344,7 @@ void line_ouverture3_ui8matrix_fusion_ilu15_red(uint8 **X, int i, int j0, int j1
         break;
 
         case 14:
-        //printf("ilu15 case%d\n",r);
+        
         n04 = load2(X,i-2,j+2);
         n14 = load2(X,i-1,j+2);
         n24 = load2(X,i  ,j+2);

@@ -180,7 +180,7 @@ int compare_ui8matrix(uint8 **X, int i0, int i1, int j0, int j1, uint8 **Y, char
     for(int i=i0; i<=i1; i++) {
         for(int j=j0; j<=j1; j++) {
             if(X[i][j] != Y[i][j]) {
-                //printf("%s [%3d][%3d] = %3d NEQ %3d\n", name, i, j, X[i][i], Y[i][i]);
+                printf("%s [%3d][%3d] = %3d NEQ %3d\n", name, i, j, X[i][i], Y[i][i]);
                 c++;
             }
         }
