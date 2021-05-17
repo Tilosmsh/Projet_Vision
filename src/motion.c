@@ -242,13 +242,18 @@ void motion_detection_morpho_v1(void)
         MLoadPGM_ui8matrix(complete_filename_I, i0, i1, j0, j1, I);
         
         SigmaDelta_1Step(I, M, O, V, E, 3, i0, i1, j0, j1);
-    
+        //ouverture fermeture
         // morpho en niveau de gris fonctionnant aussi sur des images 1 bit / pixel
-            erosion3_ui8matrix_basic   (E,           i0, i1, j0, j1, Erosion1);
-         dilatation3_ui8matrix_basic   (Erosion1,    i0, i1, j0, j1, Dilatation1);
-         dilatation3_ui8matrix_basic   (Dilatation1, i0, i1, j0, j1, Dilatation2);
-            erosion3_ui8matrix_basic   (Dilatation2, i0, i1, j0, j1, Erosion2);
-    
+            erosion3_ui8matrix_ilu3_elu2_red_factor   (E,           i0, i1, j0, j1, Erosion1);
+         dilatation3_ui8matrix_ilu3_elu2_red_factor   (Erosion1,    i0, i1, j0, j1, Dilatation1);
+         dilatation3_ui8matrix_ilu3_elu2_red_factor   (Dilatation1, i0, i1, j0, j1, Dilatation2);
+            erosion3_ui8matrix_ilu3_elu2_red_factor   (Dilatation2, i0, i1, j0, j1, Erosion2);
+
+        //ouverture3_ui8matrix_fusion_basic   (E,           i0, i1, j0, j1, Dilatation1);
+        //printf("erz");
+        //fermeture3_ui8matrix_fusion_basic   (Dilatation1,    i0, i1, j0, j1, Erosion2);
+           
+  
         //if((t < 100) || (t > 150)) continue;
         
         /*// traitement pour visualisation
