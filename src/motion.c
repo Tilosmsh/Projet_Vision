@@ -6,11 +6,16 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
+#include <time.h>
 
 #include "nrtype.h"
 #include "nrdef.h"
 #include "nrutil.h"
 
+#include "morpho_dilatation.h"
+#include "morpho_erosion.h"
+#include "morpho_dilatation_swp64.h"
+#include "morpho_erosion_swp64.h"
 #include "sigmadelta.h"
 
 #include "morpho.h"
@@ -91,7 +96,8 @@ void test_PGM(void)
     i0 = 0; i1 = h-1; j0 = 0; j1 = w-1;
     
     //src_path = "/Users/lacas/Code/MotionACC/results/";
-    src_path = "/Users/tilos/Downloads/github/Canitrot_Li_3I013/Projet_visionFinal/results/";
+    src_path = "/home/julien/Documents/Fac/L3/p-vision-f2/Projet_visionFinal/results/";
+    //src_path = "/Users/tilos/Downloads/github/Canitrot_Li_3I013/Projet_visionFinal/results/";
     
     generate_path_filename_k_ndigit_extension(dst_path, "I_", tstart, ndigit, "pgm", complete_filenameI);
     generate_path_filename_k_ndigit_extension(dst_path, "M_", tstart, ndigit, "pgm", complete_filenameM);
@@ -230,22 +236,27 @@ void motion_detection_morpho_v1(void)
     // -- boucle --
     for(int t=tstart; t<=tstop; t+=tstep) {
         
-        printf("-- i = %3d ----------\n", t);
+       // printf("-- i = %3d ----------\n", t);
         
         generate_path_filename_k_ndigit_extension(src_path, filename, t, ndigit, "pgm", complete_filename_I);
         MLoadPGM_ui8matrix(complete_filename_I, i0, i1, j0, j1, I);
         
         SigmaDelta_1Step(I, M, O, V, E, 3, i0, i1, j0, j1);
-    
+        //ouverture fermeture
         // morpho en niveau de gris fonctionnant aussi sur des images 1 bit / pixel
-        erosion3_ui8matrix_basic   (E,           i0, i1, j0, j1, Erosion1);
-        dilatation3_ui8matrix_basic(Erosion1,    i0, i1, j0, j1, Dilatation1);
-        dilatation3_ui8matrix_basic(Dilatation1, i0, i1, j0, j1, Dilatation2);
-        erosion3_ui8matrix_basic   (Dilatation2, i0, i1, j0, j1, Erosion2);
-    
+            erosion3_ui8matrix_ilu3_elu2_red_factor   (E,           i0, i1, j0, j1, Erosion1);
+         dilatation3_ui8matrix_ilu3_elu2_red_factor   (Erosion1,    i0, i1, j0, j1, Dilatation1);
+         dilatation3_ui8matrix_ilu3_elu2_red_factor   (Dilatation1, i0, i1, j0, j1, Dilatation2);
+            erosion3_ui8matrix_ilu3_elu2_red_factor   (Dilatation2, i0, i1, j0, j1, Erosion2);
+
+        //ouverture3_ui8matrix_fusion_basic   (E,           i0, i1, j0, j1, Dilatation1);
+        //printf("erz");
+        //fermeture3_ui8matrix_fusion_basic   (Dilatation1,    i0, i1, j0, j1, Erosion2);
+           
+  
         //if((t < 100) || (t > 150)) continue;
         
-        // traitement pour visualisation
+        /*// traitement pour visualisation
         threshold_ui8matrix(E,           1, 255, E_8,           i0, i1, j0, j1);
         threshold_ui8matrix(Erosion1,    1, 255, Erosion1_8,    i0, i1, j0, j1);
         threshold_ui8matrix(Erosion2,    1, 255, Erosion2_8,    i0, i1, j0, j1);
@@ -283,7 +294,7 @@ void motion_detection_morpho_v1(void)
         //SavePGM_ui8matrix(Erosion1_8   , i0, i1, j0, j1, complete_filename_erosion1   );
         //SavePGM_ui8matrix(Dilatation1_8, i0, i1, j0, j1, complete_filename_dilatation1);
         //SavePGM_ui8matrix(Dilatation2_8, i0, i1, j0, j1, complete_filename_dilatation2);
-        SavePGM_ui8matrix(Erosion2_8   , i0, i1, j0, j1, complete_filename_erosion2   );
+        SavePGM_ui8matrix(Erosion2_8   , i0, i1, j0, j1, complete_filename_erosion2   );*/
     } // t
     
     
@@ -311,7 +322,18 @@ void motion_detection_morpho_v1(void)
 // ===============================
 void motion_detection_morpho(void)
 // ===============================
-{
+{   
+    //clock_t start_t, end_t;
+   
+
+    //start_t = clock();
+    //printf("Starting of the program, start_t = %ld\n", start_t);
     motion_detection_morpho_v1();
+
+    //end_t = clock();
+    
+    //float total_t = (end_t - start_t)*1.0/CLOCKS_PER_SEC; //
+    //printf("End of the big loop, end_t = %f\n", end_t);
+    //printf("Total time taken by CPU: %f\n", total_t  );
     //test_PGM();
 }
