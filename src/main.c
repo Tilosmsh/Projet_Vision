@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
     //test_nrutil_ext(argc, argv); //manipulation et affichage en bit
     //test_swp(argc, argv);
     
-    test_morpho(argc, argv);
-    //test_motion(argc, argv);
+    //test_morpho(argc, argv);
+    test_motion(argc, argv);
     return 0;
 }
